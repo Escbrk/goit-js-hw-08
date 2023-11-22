@@ -1,5 +1,5 @@
 // Add imports above this line
-import { galleryItems } from './gallery-items'; 
+import { galleryItems } from './gallery-items';
 // Change code below this line
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -26,31 +26,9 @@ const imageEL = galleryItems
 
 gallery.innerHTML = imageEL;
 
-gallery.addEventListener('click', onClick);
-let instance = null;
-
-const escClose = event => {
-  console.log(event.code);
-
-  if (event.code === 'Escape') {
-    instance.close();
-  }
-};
-
-function onClick(event) {
-  event.preventDefault();
-
-  if (event.target.tagName !== 'IMG') {
-    return;
-  }
-
-  const res = event.target.dataset.source;
-
-  instance = basicLightbox.create(
-    `<img src=${res}>`,
-    { onShow: () => document.addEventListener('keydown', escClose) },
-    { onClose: () => document.removeEventListener('keydown', escClose) }
-  );
-  instance.show();
-}
-
+let lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionDelay: 250,
+});
