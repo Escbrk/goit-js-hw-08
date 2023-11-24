@@ -27,8 +27,6 @@ const imageEL = galleryItems
 gallery.innerHTML = imageEL;
 
 let lightbox = new SimpleLightbox('.gallery a', {
-  captions: true,
-  captionType: 'attr',
   captionsData: 'alt',
   captionDelay: 250,
 });
