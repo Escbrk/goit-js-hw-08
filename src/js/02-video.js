@@ -1,37 +1,11 @@
 import Player from '@vimeo/player';
+import throttle from 'lodash.throttle';
 
-const localStr = 'videoplayer-current-time';
-
-const THROTTLE = 1000;
-
-const player = new Player('handstick', {
-  id: 'vimeo-player',
-  width: 640,
-});
+const VIDEOPLAYER_CURRENT_TIME = 'videoplayer-current-time';
 
 const onPlay = function (data) {
-  // data is an object containing properties specific to that event
+  const time = Math.floor(data.seconds);
+  localStorage.setItem(VIDEOPLAYER_CURRENT_TIME, time);
 };
 
-
-player.on('play', function () {
-  console.log('played the video!');
-});
-
-
-// player
-//   .setCurrentTime(30.456)
-//   .then(function (seconds) {
-//     // seconds = the actual time that the player seeked to
-//   })
-//   .catch(function (error) {
-//     switch (error.name) {
-//       case 'RangeError':
-//         // the time was less than 0 or greater than the video’s duration
-//         break;
-
-//       default:
-//         // some other error occurred
-//         break;
-//     }
-//   });
+player.on('timeupdate', throttle(onPlay, 1000));
