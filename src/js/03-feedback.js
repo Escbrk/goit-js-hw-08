@@ -23,7 +23,6 @@ function onInput(e) {
 
 function updateForm() {
   const data = JSON.parse(localStorage.getItem(refs.FEEDBACK_FORM_STATE));
-  console.log(data);
   
   refs.input.value = data.email
   refs.textArea.value = data.message
