@@ -4,7 +4,6 @@ const refs = {
   form: document.querySelector('.feedback-form'),
   input: document.querySelector("[type='email']"),
   textArea: document.querySelector("[name='message']"),
-  submitBtn: document.querySelector('[type="submit"]'),
   FEEDBACK_FORM_STATE: 'feedback-form-state',
 };
 
@@ -23,16 +22,16 @@ function onInput(e) {
 
 function updateForm() {
   const data = JSON.parse(localStorage.getItem(refs.FEEDBACK_FORM_STATE));
-  
-  refs.input.value = data.email
-  refs.textArea.value = data.message
+
+  refs.input.value = data.email;
+  refs.textArea.value = data.message;
 }
 
 function onSubmit(e) {
   e.preventDefault();
 
   if (refs.input.value === '' || refs.textArea.value === '') {
-     return alert('Все поля должны быть заполнены!');
+    return alert('Все поля должны быть заполнены!');
   }
 
   const data = {
@@ -43,7 +42,7 @@ function onSubmit(e) {
   console.log(data);
 
   refs.form.reset();
-  localStorage.removeItem(refs.FEEDBACK_FORM_STATE)
+  localStorage.removeItem(refs.FEEDBACK_FORM_STATE);
 }
 
 updateForm();
